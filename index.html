@@ -142,34 +142,23 @@
     right: 5%;
     top: 50%;
     transform: translateY(-50%);
-    width: 320px;
-    height: 320px;
+    width: 340px;
+    height: 340px;
     border-radius: 50%;
-    background: conic-gradient(
-      from 0deg,
-      #222 0deg, #1a1a1a 30deg, #2a0810 60deg,
-      #333 90deg, #111 120deg, #1a0810 150deg,
-      #2a2a2a 180deg, #111 210deg, #1a0a0e 240deg,
-      #333 270deg, #1a1a1a 300deg, #222 330deg, #1a1a1a 360deg
-    );
+    overflow: hidden;
+    animation: discSpin 12s linear infinite;
     box-shadow:
-      0 0 0 3px rgba(200,16,46,0.5),
-      0 0 60px rgba(200,16,46,0.2),
-      inset 0 0 80px rgba(0,0,0,0.8);
-    animation: discSpin 20s linear infinite;
+      0 0 0 3px rgba(200,16,46,0.6),
+      0 0 80px rgba(200,16,46,0.25),
+      0 0 160px rgba(200,16,46,0.1);
   }
 
-  .hero-disc::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
+  .hero-disc img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 50%;
-    background: radial-gradient(circle, #2a2a2a, #111);
-    border: 2px solid rgba(200,16,46,0.4);
-    box-shadow: 0 0 20px rgba(200,16,46,0.3);
+    display: block;
   }
 
   @keyframes discSpin {
@@ -1190,7 +1179,7 @@
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-slash"></div>
-    <div class="hero-disc"></div>
+    <div class="hero-disc"><img src="logo.png" alt="Dalglish Archives"></div>
     <div class="hero-content">
       <img src="logo.png" alt="Dalglish Archives Film Production" class="hero-logo">
       <p class="hero-eyebrow">Premium Film Student Blu-ray Packages</p>
