@@ -1,0 +1,2010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dalglish Archives | Film Student Blu-ray Packages</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --deep: #111111;
+    --card: #181818;
+    --red: #C8102E;
+    --red-dim: #8B0B1F;
+    --silver: #B8BFC9;
+    --silver-light: #D8DDE6;
+    --white: #F2F2F2;
+    --muted: #6B7280;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  /* ── FILM STRIP UTILITY ── */
+  .filmstrip {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    height: 28px;
+    background: var(--deep);
+    position: relative;
+    overflow: hidden;
+  }
+  .filmstrip::before,
+  .filmstrip::after {
+    content: '';
+    position: absolute;
+    top: 5px; bottom: 5px;
+    width: 100%;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0px, transparent 10px,
+      var(--silver) 10px, var(--silver) 18px,
+      transparent 18px, transparent 28px
+    );
+    opacity: 0.15;
+  }
+  .filmstrip-red {
+    background: var(--red);
+    height: 3px;
+    width: 100%;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(8,8,8,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(200,16,46,0.3);
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    cursor: pointer;
+  }
+  .nav-logo span { color: var(--red); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--silver);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--red); }
+
+  /* ── PAGES ── */
+  .page { display: none; padding-top: 64px; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ══════════════════════════════════════
+     HOME PAGE
+  ══════════════════════════════════════ */
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--black);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(200,16,46,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 80% at 30% 50%, rgba(184,191,201,0.04) 0%, transparent 60%);
+  }
+
+  /* diagonal slash */
+  .hero-slash {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 45%;
+    background: linear-gradient(135deg, transparent 0%, var(--deep) 40%, #1a0a0e 100%);
+    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .hero-disc {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      #222 0deg, #1a1a1a 30deg, #2a0810 60deg,
+      #333 90deg, #111 120deg, #1a0810 150deg,
+      #2a2a2a 180deg, #111 210deg, #1a0a0e 240deg,
+      #333 270deg, #1a1a1a 300deg, #222 330deg, #1a1a1a 360deg
+    );
+    box-shadow:
+      0 0 0 3px rgba(200,16,46,0.5),
+      0 0 60px rgba(200,16,46,0.2),
+      inset 0 0 80px rgba(0,0,0,0.8);
+    animation: discSpin 20s linear infinite;
+  }
+
+  .hero-disc::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2a2a2a, #111);
+    border: 2px solid rgba(200,16,46,0.4);
+    box-shadow: 0 0 20px rgba(200,16,46,0.3);
+  }
+
+  @keyframes discSpin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to   { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 5%;
+    max-width: 600px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title .line2 { color: var(--silver); }
+
+  .hero-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--silver);
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--red);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover {
+    background: #e01535;
+    box-shadow: 0 0 20px rgba(200,16,46,0.5);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--silver);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    border: 1px solid var(--silver);
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 1rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--deep);
+    border-top: 1px solid rgba(200,16,46,0.25);
+    border-bottom: 1px solid rgba(200,16,46,0.25);
+    padding: 2.5rem 5%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    color: var(--red);
+    letter-spacing: 0.05em;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
+  /* PREVIEW PACKAGES on home */
+  .section {
+    padding: 5rem 5%;
+  }
+  .section-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+  .section-sub {
+    font-size: 0.95rem;
+    color: var(--silver);
+    max-width: 560px;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 3rem;
+  }
+
+  .package-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .pkg-card {
+    background: var(--card);
+    border: 1px solid rgba(184,191,201,0.1);
+    padding: 2.5rem 2rem;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .pkg-card:hover {
+    border-color: var(--red);
+    transform: translateY(-4px);
+  }
+  .pkg-card.featured {
+    border-color: var(--red);
+    background: linear-gradient(160deg, #1e0a0f 0%, #181818 60%);
+  }
+  .pkg-badge {
+    position: absolute;
+    top: -1px; right: 24px;
+    background: var(--red);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    color: var(--white);
+  }
+  .pkg-tier {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-bottom: 0.5rem;
+  }
+  .pkg-name {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  .pkg-disc-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: conic-gradient(#333, #1a1a1a, #2a2a2a, #111, #333);
+    border: 2px solid rgba(200,16,46,0.3);
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+  .pkg-disc-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1px solid rgba(200,16,46,0.3);
+  }
+  .pkg-features {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+  .pkg-features li {
+    font-size: 0.85rem;
+    color: var(--silver);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 300;
+  }
+  .pkg-features li::before {
+    content: '▸';
+    color: var(--red);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+  .pkg-cta {
+    width: 100%;
+    padding: 0.9rem;
+    background: transparent;
+    border: 1px solid rgba(184,191,201,0.3);
+    color: var(--silver);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .pkg-cta:hover, .pkg-card.featured .pkg-cta {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+  }
+
+  /* MERCH PREVIEW on home */
+  .merch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  .merch-card {
+    background: var(--card);
+    border: 1px solid rgba(184,191,201,0.08);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .merch-card:hover { border-color: rgba(200,16,46,0.5); }
+  .merch-img {
+    height: 200px;
+    background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+  .merch-info { padding: 1rem 1.2rem; }
+  .merch-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+  }
+  .merch-sub { font-size: 0.75rem; color: var(--muted); }
+
+  /* ══════════════════════════════════════
+     ABOUT PAGE
+  ══════════════════════════════════════ */
+  .page-hero {
+    background: linear-gradient(160deg, #150309 0%, var(--black) 60%);
+    padding: 5rem 5% 4rem;
+    border-bottom: 1px solid rgba(200,16,46,0.2);
+  }
+  .page-hero-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.75rem;
+  }
+  .page-hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .page-hero-sub {
+    font-size: 1rem;
+    color: var(--silver);
+    max-width: 580px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .about-body { font-size: 0.95rem; color: var(--silver); line-height: 1.85; font-weight: 300; }
+  .about-body p { margin-bottom: 1.2rem; }
+  .about-body strong { color: var(--white); font-weight: 600; }
+
+  .about-visual {
+    background: var(--card);
+    border: 1px solid rgba(200,16,46,0.2);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .about-val {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+  .about-val-icon {
+    width: 40px; height: 40px;
+    background: rgba(200,16,46,0.1);
+    border: 1px solid rgba(200,16,46,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .about-val-text h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+  .about-val-text p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+  /* ══════════════════════════════════════
+     WHAT WE DO PAGE
+  ══════════════════════════════════════ */
+  .process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2rem;
+    align-items: start;
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .step-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: rgba(200,16,46,0.3);
+    line-height: 1;
+    text-align: center;
+  }
+  .step-content h3 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+  .step-content p {
+    font-size: 0.9rem;
+    color: var(--silver);
+    line-height: 1.75;
+    max-width: 620px;
+    font-weight: 300;
+  }
+  .step-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(184,191,201,0.2);
+    color: var(--silver);
+  }
+
+  /* ══════════════════════════════════════
+     PACKAGES PAGE
+  ══════════════════════════════════════ */
+  .packages-full {
+    padding: 0 5% 5rem;
+  }
+  .package-detail {
+    background: var(--card);
+    border: 1px solid rgba(184,191,201,0.1);
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+  .package-detail.featured-pkg {
+    border-color: var(--red);
+  }
+  .pkg-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 2rem 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+  }
+  .pkg-header-left { display: flex; align-items: center; gap: 1.5rem; }
+  .pkg-disc-lg {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: conic-gradient(#444, #222, #3a3a3a, #111, #444);
+    border: 3px solid rgba(200,16,46,0.4);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .pkg-disc-lg::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1px solid rgba(200,16,46,0.4);
+  }
+  .featured-pkg .pkg-disc-lg {
+    border-color: var(--red);
+    box-shadow: 0 0 20px rgba(200,16,46,0.3);
+  }
+  .pkg-header-info .pkg-tier { margin-bottom: 0.25rem; }
+  .pkg-header-info .pkg-name { font-size: 2.2rem; margin-bottom: 0; }
+  .pkg-header-right { text-align: right; }
+  .pkg-price-label { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  .pkg-price { font-family: var(--font-display); font-size: 2.5rem; color: var(--red); letter-spacing: 0.05em; }
+  .pkg-price-note { font-size: 0.7rem; color: var(--muted); }
+
+  .pkg-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 2.5rem;
+  }
+  .pkg-section-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+  }
+  .pkg-list { list-style: none; }
+  .pkg-list li {
+    font-size: 0.88rem;
+    color: var(--silver);
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-weight: 300;
+  }
+  .pkg-list li::before { content: '▸'; color: var(--red); font-size: 0.65rem; flex-shrink: 0; }
+  .pkg-enquire {
+    display: block;
+    width: 200px;
+    margin: 0 2.5rem 2.5rem auto;
+    padding: 0.85rem;
+    background: var(--red);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .pkg-enquire:hover { background: #e01535; box-shadow: 0 0 20px rgba(200,16,46,0.4); }
+
+  /* ══════════════════════════════════════
+     MERCHANDISE PAGE
+  ══════════════════════════════════════ */
+  .merch-full-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .merch-full-card {
+    background: var(--card);
+    border: 1px solid rgba(184,191,201,0.08);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .merch-full-card:hover {
+    border-color: rgba(200,16,46,0.4);
+    transform: translateY(-3px);
+  }
+  .merch-full-img {
+    height: 240px;
+    background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .merch-full-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(200,16,46,0.08) 100%);
+  }
+  .merch-full-info { padding: 1.5rem; }
+  .merch-full-name {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  .merch-full-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .merch-enquire {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: color 0.2s;
+  }
+  .merch-enquire:hover { color: var(--silver-light); }
+
+  /* ══════════════════════════════════════
+     ENQUIRY PAGE
+  ══════════════════════════════════════ */
+  .enquiry-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    padding: 0 5% 5rem;
+  }
+  .enquiry-info h3 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+  }
+  .enquiry-info p {
+    font-size: 0.88rem;
+    color: var(--silver);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+  .contact-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+  }
+  .contact-icon {
+    width: 36px; height: 36px;
+    background: rgba(200,16,46,0.1);
+    border: 1px solid rgba(200,16,46,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .contact-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+  .contact-val { font-size: 0.88rem; color: var(--silver); }
+
+  .enquiry-form {
+    background: var(--card);
+    border: 1px solid rgba(184,191,201,0.1);
+    padding: 2.5rem;
+  }
+  .form-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 1.8rem;
+  }
+  .form-row { margin-bottom: 1.2rem; }
+  .form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .form-label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-bottom: 0.5rem;
+  }
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(184,191,201,0.2);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--red);
+  }
+  .form-select option { background: var(--card); }
+  .form-textarea { resize: vertical; min-height: 100px; }
+  .form-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--red);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .form-submit:hover { background: #e01535; box-shadow: 0 0 24px rgba(200,16,46,0.5); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    border-top: 1px solid rgba(200,16,46,0.2);
+    padding: 3rem 5%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2rem;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .footer-logo span { color: var(--red); }
+  .footer-tagline { font-size: 0.8rem; color: var(--muted); }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+    letter-spacing: 0.08em;
+  }
+  .footer-links a:hover { color: var(--red); }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    background: var(--red);
+    color: var(--white);
+    padding: 1rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    z-index: 999;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .package-grid, .merch-full-grid { grid-template-columns: 1fr; }
+    .pkg-body { grid-template-columns: 1fr; gap: 1.5rem; }
+    .about-grid, .enquiry-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .merch-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-disc { display: none; }
+    .hero-slash { display: none; }
+    .pkg-header { grid-template-columns: 1fr; gap: 1rem; }
+    .pkg-header-right { text-align: left; }
+    .footer { grid-template-columns: 1fr; }
+    .footer-links { flex-wrap: wrap; gap: 1rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.68rem; }
+  }
+
+  .nav-logo-img {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+    border-radius: 50%;
+    margin-right: 0.6rem;
+    vertical-align: middle;
+    filter: drop-shadow(0 0 4px rgba(200,16,46,0.5));
+  }
+  .hero-logo {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 24px rgba(200,16,46,0.5));
+    animation: logoPulse 4s ease-in-out infinite;
+  }
+  @keyframes logoPulse {
+    0%, 100% { filter: drop-shadow(0 0 16px rgba(200,16,46,0.4)); }
+    50% { filter: drop-shadow(0 0 36px rgba(200,16,46,0.75)); }
+  }
+  .footer-logo-img {
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    opacity: 0.85;
+  }
+
+  .pkg-body-standard {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto;
+  }
+  .pkg-photo-wrap {
+    grid-column: 1 / -1;
+    margin-top: 0.5rem;
+  }
+  .pkg-photo {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border: 1px solid rgba(184,191,201,0.15);
+    filter: brightness(0.95);
+    transition: filter 0.3s;
+  }
+  .pkg-photo:hover { filter: brightness(1.05); }
+  .pkg-photo-caption {
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.6rem;
+    text-align: center;
+  }
+
+  /* ── ASIAN CINEMA PAGE ── */
+  .asian-intro {
+    background: var(--deep);
+    border-bottom: 1px solid rgba(200,16,46,0.2);
+    padding: 2rem 5%;
+  }
+  .asian-intro-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .asian-intro-stat {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .asian-stat-num {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--red);
+    letter-spacing: 0.05em;
+  }
+  .asian-stat-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .asian-intro-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(184,191,201,0.2);
+    flex-shrink: 0;
+    margin: 0 1rem;
+  }
+
+  /* catalogue grid */
+  .catalogue-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .cat-card {
+    background: var(--card);
+    border: 1px solid rgba(184,191,201,0.08);
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .cat-card:hover {
+    border-color: rgba(200,16,46,0.4);
+    transform: translateY(-4px);
+  }
+  .cat-img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .cat-img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.4s;
+    filter: brightness(0.88);
+  }
+  .cat-card:hover .cat-img { transform: scale(1.03); filter: brightness(1); }
+  .cat-overlay {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .cat-country, .cat-genre {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    backdrop-filter: blur(6px);
+  }
+  .cat-country {
+    background: rgba(8,8,8,0.75);
+    color: var(--silver-light);
+    border: 1px solid rgba(184,191,201,0.2);
+  }
+  .cat-genre {
+    background: rgba(200,16,46,0.85);
+    color: var(--white);
+  }
+  .cat-play {
+    position: absolute;
+    bottom: 1rem; right: 1rem;
+    width: 40px; height: 40px;
+    background: rgba(200,16,46,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+    cursor: pointer;
+  }
+  .cat-card:hover .cat-play { opacity: 1; }
+  .cat-info { padding: 1.8rem; }
+  .cat-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+  .cat-title {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+  }
+  .cat-director {
+    font-size: 0.78rem;
+    color: var(--red);
+    font-weight: 500;
+    margin-bottom: 0.9rem;
+    font-style: italic;
+  }
+  .cat-synopsis {
+    font-size: 0.85rem;
+    color: var(--silver);
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+  }
+  .cat-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.4rem;
+  }
+  .cat-tag {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid rgba(184,191,201,0.2);
+    color: var(--silver);
+  }
+  .cat-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background: transparent;
+    border: 1px solid rgba(200,16,46,0.4);
+    color: var(--red);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cat-btn:hover {
+    background: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+  }
+
+  /* sourcing strip */
+  .sourcing-strip {
+    background: linear-gradient(135deg, #150309, #0d0d0d);
+    border-top: 1px solid rgba(200,16,46,0.25);
+    border-bottom: 1px solid rgba(200,16,46,0.25);
+    padding: 3rem 5%;
+  }
+  .sourcing-inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    max-width: 1100px;
+  }
+  .sourcing-icon { font-size: 2.5rem; flex-shrink: 0; }
+  .sourcing-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  .sourcing-body {
+    font-size: 0.85rem;
+    color: var(--silver);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  @media (max-width: 900px) {
+    .catalogue-grid { grid-template-columns: 1fr; }
+    .sourcing-inner { flex-direction: column; align-items: flex-start; }
+    .asian-intro-inner { flex-wrap: wrap; gap: 1.5rem; }
+    .asian-intro-divider { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')"><img src="logo.png" alt="Dalglish Archives" class="nav-logo-img">DALGISH<span>.</span>ARCHIVES</div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">Who We Are</a></li>
+    <li><a onclick="showPage('whatwedo')" id="nav-whatwedo">What We Do</a></li>
+    <li><a onclick="showPage('packages')" id="nav-packages">Packages</a></li>
+    <li><a onclick="showPage('merch')" id="nav-merch">Merchandise</a></li>
+    <li><a onclick="showPage('asian')" id="nav-asian">Asian Cinema</a></li>
+    <li><a onclick="showPage('enquiry')" id="nav-enquiry">Enquire</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════ HOME PAGE ═══════════════════ -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-slash"></div>
+    <div class="hero-disc"></div>
+    <div class="hero-content">
+      <img src="logo.png" alt="Dalglish Archives Film Production" class="hero-logo">
+      <p class="hero-eyebrow">Premium Film Student Blu-ray Packages</p>
+      <h1 class="hero-title">
+        YOUR FILM.<br>
+        <span class="line2">PRESERVED.</span><br>
+        FOREVER.
+      </h1>
+      <p class="hero-body">
+        Professional Blu-ray packages for film students and their courses. Your final film, beautifully mastered, packaged and delivered — with outtakes, course collaborations, and print merchandise to match.
+      </p>
+      <a class="btn-primary" onclick="showPage('packages')">View Packages</a>
+      <a class="btn-outline" onclick="showPage('enquiry')">Enquire Now</a>
+    </div>
+  </section>
+
+  <div class="filmstrip-red"></div>
+  <div class="filmstrip"></div>
+  <div class="filmstrip-red"></div>
+
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-num">HD</span><span class="stat-label">Full 1080p Master</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label">Package Tiers</span></div>
+    <div class="stat"><span class="stat-num">14</span><span class="stat-label">Day Turnaround</span></div>
+    <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Student Focused</span></div>
+  </div>
+
+  <section class="section">
+    <p class="section-eyebrow">Our Packages</p>
+    <h2 class="section-title">THREE WAYS TO REMEMBER YOUR FILM</h2>
+    <p class="section-sub">From a clean, professional disc to a fully loaded collector's edition — every package is crafted with the attention your final film deserves.</p>
+
+    <div class="package-grid">
+      <!-- Standard -->
+      <div class="pkg-card" onclick="showPage('packages')">
+        <div class="pkg-disc-icon"></div>
+        <p class="pkg-tier">Tier 01</p>
+        <h3 class="pkg-name">STANDARD</h3>
+        <ul class="pkg-features">
+          <li>Your final film, mastered to Blu-ray</li>
+          <li>Professionally printed case & disc</li>
+          <li>Individual or bulk course orders</li>
+          <li>Digital download code included</li>
+        </ul>
+        <button class="pkg-cta">Find Out More</button>
+      </div>
+
+      <!-- Premium -->
+      <div class="pkg-card featured" onclick="showPage('packages')">
+        <div class="pkg-badge">Most Popular</div>
+        <div class="pkg-disc-icon"></div>
+        <p class="pkg-tier">Tier 02</p>
+        <h3 class="pkg-name">PREMIUM</h3>
+        <ul class="pkg-features">
+          <li>Everything in Standard</li>
+          <li>Outtakes & behind-the-scenes reel</li>
+          <li>Course cohort films on disc</li>
+          <li>Director's commentary track</li>
+          <li>A5 photo card included</li>
+        </ul>
+        <button class="pkg-cta">Find Out More</button>
+      </div>
+
+      <!-- Ultimate -->
+      <div class="pkg-card" onclick="showPage('packages')">
+        <div class="pkg-disc-icon"></div>
+        <p class="pkg-tier">Tier 03</p>
+        <h3 class="pkg-name">ULTIMATE</h3>
+        <ul class="pkg-features">
+          <li>Everything in Premium</li>
+          <li>Collector's rigid case packaging</li>
+          <li>A2 film poster — print-ready</li>
+          <li>Graded & colour-corrected master</li>
+          <li>Full course cohort box set</li>
+          <li>Exclusive merch item included</li>
+        </ul>
+        <button class="pkg-cta">Find Out More</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="filmstrip-red"></div>
+  <div class="filmstrip"></div>
+  <div class="filmstrip-red"></div>
+
+  <section class="section" style="background: var(--deep);">
+    <p class="section-eyebrow">Merchandise</p>
+    <h2 class="section-title">MORE THAN JUST A DISC</h2>
+    <p class="section-sub">Posters, cards, and branded collectibles to go alongside your Blu-ray. Available separately or as part of a bundle.</p>
+
+    <div class="merch-grid">
+      <div class="merch-card" onclick="showPage('merch')">
+        <div class="merch-img">🎬</div>
+        <div class="merch-info">
+          <div class="merch-name">Film Poster</div>
+          <div class="merch-sub">A2 / A3 professional print</div>
+        </div>
+      </div>
+      <div class="merch-card" onclick="showPage('merch')">
+        <div class="merch-img">🃏</div>
+        <div class="merch-info">
+          <div class="merch-name">Collector Cards</div>
+          <div class="merch-sub">Scene stills, cast & crew</div>
+        </div>
+      </div>
+      <div class="merch-card" onclick="showPage('merch')">
+        <div class="merch-img">📦</div>
+        <div class="merch-info">
+          <div class="merch-name">Gift Packaging</div>
+          <div class="merch-sub">Presentation boxes & wrapping</div>
+        </div>
+      </div>
+      <div class="merch-card" onclick="showPage('merch')">
+        <div class="merch-img">🎥</div>
+        <div class="merch-info">
+          <div class="merch-name">More Coming</div>
+          <div class="merch-sub">Branded crew & student items</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="footer-logo"><img src="logo.png" alt="Dalglish Archives" class="footer-logo-img">DALGISH<span>.</span>ARCHIVES</div>
+      <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('packages')">Packages</a></li>
+      <li><a onclick="showPage('merch')">Merchandise</a></li>
+      <li><a onclick="showPage('enquiry')">Enquire</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ═══════════════════ ABOUT PAGE ═══════════════════ -->
+<div class="page" id="page-about">
+  <div class="page-hero">
+    <p class="page-hero-eyebrow">Who We Are</p>
+    <h1 class="page-hero-title">MADE BY FILM PEOPLE, FOR FILM PEOPLE</h1>
+    <p class="page-hero-sub">Dalglish Archives was born from a simple frustration: film students work incredibly hard on their final projects, and those films deserve to be preserved properly — not just uploaded and forgotten.</p>
+  </div>
+
+  <div class="filmstrip-red"></div>
+  <div class="filmstrip"></div>
+  <div class="filmstrip-red"></div>
+
+  <section class="section">
+    <div class="about-grid">
+      <div class="about-body">
+        <p><strong>Dalglish Archives</strong> is a specialist Blu-ray production and packaging service dedicated entirely to film students and the academic institutions that teach them.</p>
+        <p>We understand the weight of a final film project. The late nights, the reshoots, the edit that never quite felt finished until it suddenly was. That work deserves a physical home — something you can hold, gift, and keep for the rest of your life.</p>
+        <p>Our team combines experience in post-production, graphic design, and physical media production to deliver packages that match the quality of the work inside them. From the disc mastering to the printed case, every detail is handled with care.</p>
+        <p>We work directly with students, tutors, and film departments. Whether it's a single student's passion project or an entire cohort's graduating year, we have a package to fit.</p>
+      </div>
+      <div class="about-visual">
+        <div class="about-val">
+          <div class="about-val-icon">🎬</div>
+          <div class="about-val-text">
+            <h4>Craft</h4>
+            <p>Every Blu-ray is professionally authored and tested before it leaves our studio. No shortcuts.</p>
+          </div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-icon">🎓</div>
+          <div class="about-val-text">
+            <h4>Student First</h4>
+            <p>Our pricing, processes and packages are built around the reality of student budgets and timelines.</p>
+          </div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-icon">📦</div>
+          <div class="about-val-text">
+            <h4>Presentation</h4>
+            <p>The package should be as impressive as the film. We obsess over every printed detail.</p>
+          </div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-icon">🤝</div>
+          <div class="about-val-text">
+            <h4>Relationships</h4>
+            <p>We work with courses and departments year on year — trusted partners in celebrating student work.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="footer-logo"><img src="logo.png" alt="Dalglish Archives" class="footer-logo-img">DALGISH<span>.</span>ARCHIVES</div>
+      <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('packages')">Packages</a></li>
+      <li><a onclick="showPage('enquiry')">Enquire</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ═══════════════════ WHAT WE DO PAGE ═══════════════════ -->
+<div class="page" id="page-whatwedo">
+  <div class="page-hero">
+    <p class="page-hero-eyebrow">What We Do</p>
+    <h1 class="page-hero-title">FROM HARD DRIVE TO COLLECTOR'S PIECE</h1>
+    <p class="page-hero-sub">We take your finished film files and transform them into professionally authored, beautifully packaged Blu-ray products — with full support throughout.</p>
+  </div>
+
+  <div class="filmstrip-red"></div>
+  <div class="filmstrip"></div>
+  <div class="filmstrip-red"></div>
+
+  <section class="section">
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>RECEIVE YOUR FILM FILES</h3>
+          <p>You send us your final film via our secure upload portal. We accept ProRes, H.264, H.265, and most standard export formats from editing software including Premiere Pro, DaVinci Resolve, and Final Cut Pro.</p>
+          <div class="step-tags">
+            <span class="tag">ProRes</span><span class="tag">H.264</span><span class="tag">H.265</span><span class="tag">Resolve</span><span class="tag">Premiere</span>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>MASTER & AUTHOR</h3>
+          <p>Our team authors your film to full 1080p Blu-ray specification, including chapter marks, menus, and any additional content such as outtakes, director's commentary, and course cohort films. Every disc is tested on professional playback hardware before duplication.</p>
+          <div class="step-tags">
+            <span class="tag">1080p</span><span class="tag">BD-ROM</span><span class="tag">Menus</span><span class="tag">Chapters</span><span class="tag">Outtakes</span>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>DESIGN & PRINT</h3>
+          <p>We design your disc face, case insert, and any additional print merchandise — posters, collector cards, gift wrap. Our designers will work from your film's existing materials (stills, title graphics, press packs) or create something from scratch.</p>
+          <div class="step-tags">
+            <span class="tag">Disc Print</span><span class="tag">Case Insert</span><span class="tag">Poster</span><span class="tag">Cards</span>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>PACKAGE & DISPATCH</h3>
+          <p>Individual orders are packed and dispatched directly to students. Course bulk orders are shipped to your institution. Standard turnaround is 14 working days from receipt of files; express options are available.</p>
+          <div class="step-tags">
+            <span class="tag">14 Days</span><span class="tag">Bulk Orders</span><span class="tag">Direct Dispatch</span><span class="tag">Express Available</span>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <h3>SUPPORT THROUGHOUT</h3>
+          <p>A named contact manages your order from start to finish. Whether you're a solo student or a department coordinator managing 40 students, you'll have a direct line to someone who knows your project.</p>
+          <div class="step-tags">
+            <span class="tag">Named Contact</span><span class="tag">Order Tracking</span><span class="tag">Department Support</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="footer-logo"><img src="logo.png" alt="Dalglish Archives" class="footer-logo-img">DALGISH<span>.</span>ARCHIVES</div>
+      <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('packages')">Packages</a></li>
+      <li><a onclick="showPage('enquiry')">Enquire</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ═══════════════════ PACKAGES PAGE ═══════════════════ -->
+<div class="page" id="page-packages">
+  <div class="page-hero">
+    <p class="page-hero-eyebrow">Our Packages</p>
+    <h1 class="page-hero-title">THREE TIERS. ONE STANDARD.</h1>
+    <p class="page-hero-sub">Every package is professionally produced. The tier you choose determines the depth of content, the quality of packaging, and what extras you take home alongside your film.</p>
+  </div>
+
+  <div class="filmstrip-red"></div>
+  <div class="filmstrip"></div>
+  <div class="filmstrip-red"></div>
+
+  <div class="packages-full" style="margin-top:3rem;">
+
+    <!-- STANDARD -->
+    <div class="package-detail">
+      <div class="pkg-header">
+        <div class="pkg-header-left">
+          <div class="pkg-disc-lg"></div>
+          <div class="pkg-header-info">
+            <p class="pkg-tier">Tier 01</p>
+            <h2 class="pkg-name">STANDARD</h2>
+          </div>
+        </div>
+        <div class="pkg-header-right">
+          <p class="pkg-price-label">Starting From</p>
+          <p class="pkg-price">POA</p>
+          <p class="pkg-price-note">Per unit — bulk pricing available</p>
+        </div>
+      </div>
+      <div class="pkg-body pkg-body-standard">
+        <div>
+          <p class="pkg-section-title">What's Included</p>
+          <ul class="pkg-list">
+            <li>Final film mastered to 1080p Blu-ray</li>
+            <li>Custom designed disc face print</li>
+            <li>Printed case inlay with film credits</li>
+            <li>Standard Blu-ray case</li>
+            <li>Digital download code</li>
+            <li>Secure file upload portal access</li>
+          </ul>
+        </div>
+        <div>
+          <p class="pkg-section-title">Ideal For</p>
+          <ul class="pkg-list">
+            <li>Individual student final films</li>
+            <li>Course bulk orders (volume discounts apply)</li>
+            <li>Clean, professional keepsake</li>
+            <li>Gift for family and industry contacts</li>
+          </ul>
+        </div>
+        <div class="pkg-photo-wrap">
+          <img src="image1.jpg" alt="Standard Blu-ray package example" class="pkg-photo">
+          <p class="pkg-photo-caption">Example standard package — disc, booklet & case</p>
+        </div>
+      </div>
+      <button class="pkg-enquire" onclick="showPage('enquiry')">Enquire About This</button>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="package-detail featured-pkg">
+      <div class="pkg-badge">Most Popular</div>
+      <div class="pkg-header">
+        <div class="pkg-header-left">
+          <div class="pkg-disc-lg"></div>
+          <div class="pkg-header-info">
+            <p class="pkg-tier">Tier 02</p>
+            <h2 class="pkg-name">PREMIUM</h2>
+          </div>
+        </div>
+        <div class="pkg-header-right">
+          <p class="pkg-price-label">Starting From</p>
+          <p class="pkg-price">POA</p>
+          <p class="pkg-price-note">Per unit — bulk pricing available</p>
+        </div>
+      </div>
+      <div class="pkg-body">
+        <div>
+          <p class="pkg-section-title">What's Included</p>
+          <ul class="pkg-list">
+            <li>Everything in Standard</li>
+            <li>Outtakes & behind-the-scenes reel</li>
+            <li>Up to 3 course cohort films on disc</li>
+            <li>Director's commentary audio track</li>
+            <li>Enhanced disc menu with chapter select</li>
+            <li>A5 photo card (still from your film)</li>
+            <li>Embossed or spot-gloss case finish</li>
+          </ul>
+        </div>
+        <div>
+          <p class="pkg-section-title">Ideal For</p>
+          <ul class="pkg-list">
+            <li>Students wanting a fuller keepsake</li>
+            <li>Showcasing work alongside peers</li>
+            <li>Graduation gifts & end-of-year events</li>
+            <li>Departments wanting shared course disc</li>
+          </ul>
+        </div>
+      </div>
+      <button class="pkg-enquire" onclick="showPage('enquiry')">Enquire About This</button>
+    </div>
+
+    <!-- ULTIMATE -->
+    <div class="package-detail">
+      <div class="pkg-header">
+        <div class="pkg-header-left">
+          <div class="pkg-disc-lg"></div>
+          <div class="pkg-header-info">
+            <p class="pkg-tier">Tier 03</p>
+            <h2 class="pkg-name">ULTIMATE</h2>
+          </div>
+        </div>
+        <div class="pkg-header-right">
+          <p class="pkg-price-label">Starting From</p>
+          <p class="pkg-price">POA</p>
+          <p class="pkg-price-note">Per unit — bulk pricing available</p>
+        </div>
+      </div>
+      <div class="pkg-body">
+        <div>
+          <p class="pkg-section-title">What's Included</p>
+          <ul class="pkg-list">
+            <li>Everything in Premium</li>
+            <li>Rigid collector's slipcase packaging</li>
+            <li>Colour graded & corrected master</li>
+            <li>Full course cohort box set</li>
+            <li>A2 film poster — print-ready digital file</li>
+            <li>Printed A2 or A3 poster included</li>
+            <li>Exclusive Dalglish Archives branded merch item</li>
+            <li>Priority 7-day turnaround option</li>
+          </ul>
+        </div>
+        <div>
+          <p class="pkg-section-title">Ideal For</p>
+          <ul class="pkg-list">
+            <li>Standout graduation keepsakes</li>
+            <li>Award submissions and portfolio pieces</li>
+            <li>Course showcase events</li>
+            <li>Industry screenings & press packs</li>
+            <li>The film that deserves the full treatment</li>
+          </ul>
+        </div>
+      </div>
+      <button class="pkg-enquire" onclick="showPage('enquiry')">Enquire About This</button>
+    </div>
+
+  </div>
+
+  <footer>
+    <div>
+      <div class="footer-logo"><img src="logo.png" alt="Dalglish Archives" class="footer-logo-img">DALGISH<span>.</span>ARCHIVES</div>
+      <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('enquiry')">Enquire</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ═══════════════════ MERCH PAGE ═══════════════════ -->
+<div class="page" id="page-merch">
+  <div class="page-hero">
+    <p class="page-hero-eyebrow">Merchandise</p>
+    <h1 class="page-hero-title">BEYOND THE DISC</h1>
+    <p class="page-hero-sub">Posters, cards, branded items and more — all designed to sit alongside your Blu-ray package or ordered independently for screenings, events and gifts.</p>
+  </div>
+
+  <div class="filmstrip-red"></div>
+  <div class="filmstrip"></div>
+  <div class="filmstrip-red"></div>
+
+  <section class="section">
+    <div class="merch-full-grid">
+
+      <div class="merch-full-card">
+        <div class="merch-full-img">🎬</div>
+        <div class="merch-full-info">
+          <h3 class="merch-full-name">FILM POSTER</h3>
+          <p class="merch-full-desc">A2 or A3 professionally printed film poster, designed using your stills, title treatment, and credits. Perfect for framing or presenting at screenings.</p>
+          <button class="merch-enquire" onclick="showPage('enquiry')">Enquire →</button>
+        </div>
+      </div>
+
+      <div class="merch-full-card">
+        <div class="merch-full-img">🃏</div>
+        <div class="merch-full-info">
+          <h3 class="merch-full-name">COLLECTOR CARDS</h3>
+          <p class="merch-full-desc">Sets of A5 or A6 glossy photo cards featuring stills, cast portraits, or crew credits. Ideal as inserts, gifts, or handouts at screenings and festivals.</p>
+          <button class="merch-enquire" onclick="showPage('enquiry')">Enquire →</button>
+        </div>
+      </div>
+
+      <div class="merch-full-card">
+        <div class="merch-full-img">📦</div>
+        <div class="merch-full-info">
+          <h3 class="merch-full-name">GIFT PACKAGING</h3>
+          <p class="merch-full-desc">Presentation boxes, ribbon-tied wrapping, and custom tissue paper for graduation gifts or end-of-year presentations. Adds a premium unboxing moment.</p>
+          <button class="merch-enquire" onclick="showPage('enquiry')">Enquire →</button>
+        </div>
+      </div>
+
+      <div class="merch-full-card">
+        <div class="merch-full-img">🎞️</div>
+        <div class="merch-full-info">
+          <h3 class="merch-full-name">PHOTO PRINTS</h3>
+          <p class="merch-full-desc">High quality photographic prints from your production stills. Available in multiple sizes, matte or gloss, individually or as a set.</p>
+          <button class="merch-enquire" onclick="showPage('enquiry')">Enquire →</button>
+        </div>
+      </div>
+
+      <div class="merch-full-card">
+        <div class="merch-full-img">📋</div>
+        <div class="merch-full-info">
+          <h3 class="merch-full-name">PRESS PACKS</h3>
+          <p class="merch-full-desc">Printed or digital press pack folders including stills, synopsis, director's statement, and cast & crew bios — ready for festival submissions and industry introductions.</p>
+          <button class="merch-enquire" onclick="showPage('enquiry')">Enquire →</button>
+        </div>
+      </div>
+
+      <div class="merch-full-card">
+        <div class="merch-full-img">✏️</div>
+        <div class="merch-full-info">
+          <h3 class="merch-full-name">CUSTOM ITEMS</h3>
+          <p class="merch-full-desc">Branded crew items, course merchandise, tote bags, t-shirts, and more. Get in touch to discuss bespoke requirements for your course or production.</p>
+          <button class="merch-enquire" onclick="showPage('enquiry')">Enquire →</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="footer-logo"><img src="logo.png" alt="Dalglish Archives" class="footer-logo-img">DALGISH<span>.</span>ARCHIVES</div>
+      <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('packages')">Packages</a></li>
+      <li><a onclick="showPage('enquiry')">Enquire</a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- ═══════════════════ ASIAN CINEMA PAGE ═══════════════════ -->
+<div class="page" id="page-asian">
+  <div class="page-hero" style="background: linear-gradient(160deg, #0a0d15 0%, var(--black) 60%);">
+    <p class="page-hero-eyebrow">Asian Cinema Collection</p>
+    <h1 class="page-hero-title">CINEMA WITHOUT BORDERS</h1>
+    <p class="page-hero-sub">We source exceptional independent and arthouse films from Thailand, Vietnam, and across Southeast Asia — curated, licensed, and packaged to the same premium standard as our student range. Available on Blu-ray for the UK market.</p>
+  </div>
+
+  <div class="filmstrip-red"></div>
+  <div class="filmstrip"></div>
+  <div class="filmstrip-red"></div>
+
+  <!-- INTRO STRIP -->
+  <div class="asian-intro">
+    <div class="asian-intro-inner">
+      <div class="asian-intro-stat"><span class="asian-stat-num">SE Asia</span><span class="asian-stat-label">Source Region</span></div>
+      <div class="asian-intro-divider"></div>
+      <div class="asian-intro-stat"><span class="asian-stat-num">UK</span><span class="asian-stat-label">Retail Market</span></div>
+      <div class="asian-intro-divider"></div>
+      <div class="asian-intro-stat"><span class="asian-stat-num">Blu-ray</span><span class="asian-stat-label">Format</span></div>
+      <div class="asian-intro-divider"></div>
+      <div class="asian-intro-stat"><span class="asian-stat-num">English</span><span class="asian-stat-label">Subtitled</span></div>
+    </div>
+  </div>
+
+  <!-- CATALOGUE -->
+  <section class="section">
+    <p class="section-eyebrow">Current Catalogue</p>
+    <h2 class="section-title">FEATURED TITLES</h2>
+    <p class="section-sub">Each title is individually sourced, licensed for UK distribution, and packaged in our premium Blu-ray format — booklet, custom disc print, and rigid case. English subtitles included.</p>
+
+    <div class="catalogue-grid">
+
+      <!-- Film 1 -->
+      <div class="cat-card">
+        <div class="cat-img-wrap">
+          <img src="image1.jpg" alt="Placeholder film" class="cat-img">
+          <div class="cat-overlay">
+            <span class="cat-country">🇹🇭 Thailand</span>
+            <span class="cat-genre">Drama</span>
+          </div>
+          <div class="cat-play">▶</div>
+        </div>
+        <div class="cat-info">
+          <p class="cat-eyebrow">2023 · Thai · 94 min</p>
+          <h3 class="cat-title">THE LAST MONSOON</h3>
+          <p class="cat-director">Dir. Chalerm Wongvipa</p>
+          <p class="cat-synopsis">A retired fisherman in rural Chiang Rai begins receiving letters addressed to his dead son. A quiet, devastating portrait of grief and the passage of time on Thailand's northern border.</p>
+          <div class="cat-tags">
+            <span class="cat-tag">English Subtitles</span>
+            <span class="cat-tag">Blu-ray</span>
+            <span class="cat-tag">Limited Edition</span>
+          </div>
+          <button class="cat-btn" onclick="showPage('enquiry')">Enquire to Order</button>
+        </div>
+      </div>
+
+      <!-- Film 2 -->
+      <div class="cat-card">
+        <div class="cat-img-wrap">
+          <img src="image1.jpg" alt="Placeholder film" class="cat-img">
+          <div class="cat-overlay">
+            <span class="cat-country">🇻🇳 Vietnam</span>
+            <span class="cat-genre">Thriller</span>
+          </div>
+          <div class="cat-play">▶</div>
+        </div>
+        <div class="cat-info">
+          <p class="cat-eyebrow">2024 · Vietnamese · 108 min</p>
+          <h3 class="cat-title">SAIGON UNDERTOW</h3>
+          <p class="cat-director">Dir. Nguyễn Bảo Linh</p>
+          <p class="cat-synopsis">A disgraced journalist returns to Ho Chi Minh City to investigate the disappearance of a former colleague, uncovering a conspiracy that reaches into the city's political elite. Gripping and beautifully shot.</p>
+          <div class="cat-tags">
+            <span class="cat-tag">English Subtitles</span>
+            <span class="cat-tag">Blu-ray</span>
+            <span class="cat-tag">Region B</span>
+          </div>
+          <button class="cat-btn" onclick="showPage('enquiry')">Enquire to Order</button>
+        </div>
+      </div>
+
+      <!-- Film 3 -->
+      <div class="cat-card">
+        <div class="cat-img-wrap">
+          <img src="image1.jpg" alt="Placeholder film" class="cat-img">
+          <div class="cat-overlay">
+            <span class="cat-country">🇹🇭 Thailand</span>
+            <span class="cat-genre">Horror</span>
+          </div>
+          <div class="cat-play">▶</div>
+        </div>
+        <div class="cat-info">
+          <p class="cat-eyebrow">2023 · Thai · 87 min</p>
+          <h3 class="cat-title">BENEATH THE SPIRIT HOUSE</h3>
+          <p class="cat-director">Dir. Siriwan Nakamura</p>
+          <p class="cat-synopsis">When a family moves into a traditional Bangkok townhouse, their youngest daughter begins communicating with something beneath the shrine in the garden. Atmospheric folk horror rooted in Thai spiritual mythology.</p>
+          <div class="cat-tags">
+            <span class="cat-tag">English Subtitles</span>
+            <span class="cat-tag">Blu-ray</span>
+            <span class="cat-tag">Collector's Edition</span>
+          </div>
+          <button class="cat-btn" onclick="showPage('enquiry')">Enquire to Order</button>
+        </div>
+      </div>
+
+      <!-- Film 4 -->
+      <div class="cat-card">
+        <div class="cat-img-wrap">
+          <img src="image1.jpg" alt="Placeholder film" class="cat-img">
+          <div class="cat-overlay">
+            <span class="cat-country">🇻🇳 Vietnam</span>
+            <span class="cat-genre">Romance</span>
+          </div>
+          <div class="cat-play">▶</div>
+        </div>
+        <div class="cat-info">
+          <p class="cat-eyebrow">2024 · Vietnamese · 101 min</p>
+          <h3 class="cat-title">WHERE THE RIVER BENDS</h3>
+          <p class="cat-director">Dir. Trần Minh Đức</p>
+          <p class="cat-synopsis">Two strangers meet on an overnight train from Hanoi to Hội An and spend the journey navigating loss, longing, and the lives they left behind. Tender, luminous and shot entirely on location.</p>
+          <div class="cat-tags">
+            <span class="cat-tag">English Subtitles</span>
+            <span class="cat-tag">Blu-ray</span>
+            <span class="cat-tag">New Release</span>
+          </div>
+          <button class="cat-btn" onclick="showPage('enquiry')">Enquire to Order</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOURCING NOTE -->
+  <div class="sourcing-strip">
+    <div class="sourcing-inner">
+      <div class="sourcing-icon">🎬</div>
+      <div>
+        <h4 class="sourcing-title">INTERESTED IN SUBMITTING A FILM?</h4>
+        <p class="sourcing-body">We are actively seeking independent films from Thailand, Vietnam, Indonesia, Malaysia, and the wider Southeast Asian region for UK distribution. If you are a filmmaker, sales agent, or distributor, get in touch.</p>
+      </div>
+      <button class="btn-primary" onclick="showPage('enquiry')" style="flex-shrink:0;">Get In Touch</button>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <div class="footer-logo"><img src="logo.png" alt="Dalglish Archives" class="footer-logo-img">DALGISH<span>.</span>ARCHIVES</div>
+      <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('packages')">Packages</a></li>
+      <li><a onclick="showPage('enquiry')">Enquire</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ═══════════════════ ENQUIRY PAGE ═══════════════════ -->
+<div class="page" id="page-enquiry">
+  <div class="page-hero">
+    <p class="page-hero-eyebrow">Get In Touch</p>
+    <h1 class="page-hero-title">LET'S TALK ABOUT YOUR FILM</h1>
+    <p class="page-hero-sub">Whether you're a student ordering your own package, a tutor coordinating a cohort, or a department looking to partner with us — we'd love to hear from you.</p>
+  </div>
+
+  <div class="filmstrip-red"></div>
+  <div class="filmstrip"></div>
+  <div class="filmstrip-red"></div>
+
+  <div class="enquiry-grid" style="margin-top: 3rem;">
+
+    <div class="enquiry-info">
+      <h3>WHO DO WE WORK WITH?</h3>
+      <p>We work with film and media students at universities, colleges, and independent film schools across the UK. We also work directly with departments and tutors coordinating orders for full cohorts.</p>
+      <p>Not sure which package is right for you? Just fill in the form and we'll come back to you with a recommendation and pricing.</p>
+
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <p class="contact-label">Email</p>
+          <p class="contact-val">hello@dalglisharchives.co.uk</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <p class="contact-label">Based</p>
+          <p class="contact-val">United Kingdom</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">⏱️</div>
+        <div>
+          <p class="contact-label">Response Time</p>
+          <p class="contact-val">Within 2 working days</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="enquiry-form">
+      <h3 class="form-title">SEND AN ENQUIRY</h3>
+
+      <div class="form-row-2">
+        <div>
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" placeholder="Jane">
+        </div>
+        <div>
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" placeholder="Smith">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" placeholder="jane@university.ac.uk">
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">Institution / Organisation</label>
+        <input type="text" class="form-input" placeholder="University of the Arts">
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">I Am Enquiring As</label>
+        <select class="form-select">
+          <option>— Please select —</option>
+          <option>A film student</option>
+          <option>A course tutor</option>
+          <option>A department coordinator</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">Package Interest</label>
+        <select class="form-select">
+          <option>— Not sure yet —</option>
+          <option>Standard Package</option>
+          <option>Premium Package</option>
+          <option>Ultimate Package</option>
+          <option>Merchandise only</option>
+          <option>Course / bulk order</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">Your Message</label>
+        <textarea class="form-textarea" placeholder="Tell us about your film and what you're looking for..."></textarea>
+      </div>
+
+      <button class="form-submit" onclick="submitForm()">Send Enquiry</button>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <div class="footer-logo"><img src="logo.png" alt="Dalglish Archives" class="footer-logo-img">DALGISH<span>.</span>ARCHIVES</div>
+      <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('packages')">Packages</a></li>
+      <li><a onclick="showPage('merch')">Merchandise</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast">✓ Enquiry sent — we'll be in touch within 2 working days.</div>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function submitForm() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+  }
+</script>
+</body>
+</html>
