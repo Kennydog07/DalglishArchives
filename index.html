@@ -143,16 +143,16 @@
     right: 5%;
     top: 50%;
     transform: translateY(-50%);
-    width: 340px;
-    height: 340px;
+    width: 420px;
+    height: 420px;
     perspective: 800px;
     filter: drop-shadow(0 0 40px rgba(180,180,220,0.4))
             drop-shadow(0 0 80px rgba(200,16,46,0.2));
   }
 
   .disc-card {
-    width: 340px;
-    height: 340px;
+    width: 420px;
+    height: 420px;
     position: relative;
     transform-style: preserve-3d;
     animation: coinSpin 4s linear infinite;
@@ -160,8 +160,8 @@
 
   .disc-face {
     position: absolute;
-    width: 340px;
-    height: 340px;
+    width: 420px;
+    height: 420px;
     border-radius: 50%;
     overflow: hidden;
     backface-visibility: hidden;
@@ -221,8 +221,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 340px;
-    height: 340px;
+    width: 420px;
+    height: 420px;
     border-radius: 50%;
     z-index: 2;
   }
@@ -1231,7 +1231,7 @@
 
 <!-- ── NAV ── -->
 <nav>
-  <div class="nav-logo" onclick="showPage('home')"><img src="Normal_Shoes_1.png" alt="Normal Shoes" class="nav-logo-img"></div>
+  <div class="nav-logo" onclick="showPage('home')"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="nav-logo-img"></div>
   <ul class="nav-links">
     <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
     <li><a onclick="showPage('about')" id="nav-about">Who We Are</a></li>
@@ -1252,10 +1252,10 @@
     <div class="hero-disc">
   <div class="disc-card">
     <div class="disc-face disc-front">
-      <canvas id="discCanvas" width="340" height="340" class="disc-canvas"></canvas>
+      <canvas id="discCanvas" width="420" height="420" class="disc-canvas"></canvas>
     </div>
     <div class="disc-face disc-back">
-      <canvas id="discCanvasBack" width="340" height="340" class="disc-canvas"></canvas>
+      <canvas id="discCanvasBack" width="420" height="420" class="disc-canvas"></canvas>
     </div>
   </div>
 </div>
@@ -1382,7 +1382,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_1.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1449,7 +1449,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_1.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1529,7 +1529,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_1.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1690,7 +1690,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_1.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1786,7 +1786,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_1.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1944,7 +1944,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_1.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -2055,7 +2055,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_1.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -2087,11 +2087,11 @@
 
 <script>
 (function() {
-  const W = 340, H = 340, cx = W/2, cy = H/2, R = 169;
+  const W = 420, H = 420, cx = W/2, cy = H/2, R = 209;
   const SPIN_MS = 4000; // match coinSpin duration
 
   const img = new Image();
-  img.src = 'Normal_Shoes_1.png';
+  img.src = 'Normal_Shoes_transparent.png';
 
   function drawFrame(ctx, t) {
     ctx.clearRect(0, 0, W, H);
@@ -2142,7 +2142,7 @@
 
     // --- Logo: centred, transparent bg, large ---
     // Logo is wide (approx 2:1 aspect). Draw it to fill most of the disc label area.
-    const logoW = 280, logoH = 90;
+    const logoW = 360, logoH = 115;
     ctx.drawImage(img, cx - logoW/2, cy - logoH/2, logoW, logoH);
 
     // --- Spindle hole (on top) ---
