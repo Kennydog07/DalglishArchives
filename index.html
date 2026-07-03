@@ -2140,31 +2140,11 @@
 
     ctx.restore(); // end clip
 
-    // --- Logo wrapped in a ring around the spindle hole ---
-    // Draw the logo image bent around a circle: slice it into vertical strips,
-    // each strip rotated to follow the arc at radius ~130px
-    const ringR = 130;       // radius of the centre of the logo ring
-    const logoArcSpan = 1.85 * Math.PI; // how far around the disc the logo spans (~330 deg)
-    const logoStartAngle = -Math.PI / 2 - logoArcSpan / 2; // top-centre, centred
-    const slices = 120;
-    const sliceW = img.naturalWidth / slices;
-    const logoH = 100; // rendered height of each slice
-
-    for (let i = 0; i < slices; i++) {
-      const angle = logoStartAngle + (i / slices) * logoArcSpan;
-      const sx = i * sliceW;
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(angle + logoArcSpan / slices / 2);
-      // Each slice centred on the ring radius
-      const sliceRenderW = (logoArcSpan * ringR) / slices + 0.5; // slight overlap
-      ctx.drawImage(img,
-        sx, 0, sliceW, img.naturalHeight,          // source strip
-        -sliceRenderW / 2, -ringR - logoH / 2,     // dest: centred on ring
-        sliceRenderW, logoH
-      );
-      ctx.restore();
-    }
+    // --- Logo straight across, above the hole ---
+    const logoW = 340, logoH = 108;
+    const logoX = cx - logoW / 2;
+    const logoY = cy - 130 - logoH / 2; // well above centre hole
+    ctx.drawImage(img, logoX, logoY, logoW, logoH);
 
     // --- Spindle hole (on top of everything) ---
     ctx.save();
