@@ -146,22 +146,92 @@
     width: 340px;
     height: 340px;
     perspective: 800px;
-    /* red glow behind the spinning element */
-    filter: drop-shadow(0 0 40px rgba(200,16,46,0.45))
+    filter: drop-shadow(0 0 40px rgba(180,180,220,0.4))
             drop-shadow(0 0 80px rgba(200,16,46,0.2));
   }
 
-  /* ── THE SPINNING COIN ── */
-  .hero-disc-logo {
+  .disc-card {
     width: 340px;
     height: 340px;
-    border-radius: 0;
-    object-fit: contain;
-    display: block;
-    border: none;
-    animation: coinSpin 4s linear infinite;
+    position: relative;
     transform-style: preserve-3d;
-    backface-visibility: visible;
+    animation: coinSpin 4s linear infinite;
+  }
+
+  .disc-face {
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* silver Blu-ray disc base */
+    background: radial-gradient(circle at 35% 35%,
+      #f0f0f5 0%,
+      #c8c8d8 20%,
+      #9090a8 45%,
+      #606078 70%,
+      #404055 100%);
+    box-shadow:
+      inset 0 0 60px rgba(255,255,255,0.3),
+      inset 0 0 20px rgba(150,150,200,0.4),
+      0 0 0 3px rgba(180,180,220,0.5);
+  }
+
+  /* rainbow sheen overlay */
+  .disc-face::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      rgba(255,0,100,0.15),
+      rgba(255,200,0,0.15),
+      rgba(0,255,150,0.15),
+      rgba(0,150,255,0.15),
+      rgba(200,0,255,0.15),
+      rgba(255,0,100,0.15)
+    );
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+
+  /* spindle hole */
+  .disc-face::before {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #1a1a2a;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    box-shadow: 0 0 0 2px rgba(180,180,220,0.4);
+  }
+
+  .disc-back {
+    transform: rotateY(180deg);
+  }
+
+  .disc-label-img {
+    position: absolute;
+    width: 76%;
+    height: 76%;
+    object-fit: contain;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    border-radius: 50%;
+  }
+
+  /* back face label needs to be mirrored so it reads correctly */
+  .disc-label-flipped {
+    transform: translate(-50%, -50%) scaleX(-1);
   }
 
   @keyframes coinSpin {
@@ -1168,7 +1238,7 @@
 
 <!-- ── NAV ── -->
 <nav>
-  <div class="nav-logo" onclick="showPage('home')"><img src="Normal_Shoes_1.png" alt="Normal Shoes" class="nav-logo-img">NORMAL SHOES</div>
+  <div class="nav-logo" onclick="showPage('home')"><img src="Normal_Shoes_1.png" alt="Normal Shoes" class="nav-logo-img"></div>
   <ul class="nav-links">
     <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
     <li><a onclick="showPage('about')" id="nav-about">Who We Are</a></li>
@@ -1186,7 +1256,16 @@
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-slash"></div>
-    <div class="hero-disc"><img src="Normal_Shoes_1.png" alt="Normal Shoes" class="hero-disc-logo"></div>
+    <div class="hero-disc">
+  <div class="disc-card">
+    <div class="disc-face disc-front">
+      <img src="Normal_Shoes_1.png" alt="Normal Shoes" class="disc-label-img">
+    </div>
+    <div class="disc-face disc-back">
+      <img src="Normal_Shoes_1.png" alt="Normal Shoes" class="disc-label-img disc-label-flipped">
+    </div>
+  </div>
+</div>
     <div class="hero-content">
       <p class="hero-eyebrow">Premium Film Student Blu-ray Packages</p>
       <h1 class="hero-title">
