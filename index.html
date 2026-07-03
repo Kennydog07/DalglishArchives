@@ -954,9 +954,9 @@
   }
 
   .nav-logo-img {
-    height: 52px;
+    height: 104px;
     width: auto;
-    max-width: 260px;
+    max-width: 520px;
     object-fit: contain;
     border-radius: 0;
     margin-right: 0.6rem;
@@ -2140,18 +2140,39 @@
 
     ctx.restore(); // end clip
 
-    // --- Logo: centred, transparent bg, large ---
-    // Logo is wide (approx 2:1 aspect). Draw it to fill most of the disc label area.
-    const logoW = 360, logoH = 115;
-    ctx.drawImage(img, cx - logoW/2, cy - logoH/2, logoW, logoH);
+    // --- Logo wrapped in a ring around the spindle hole ---
+    // Draw the logo image bent around a circle: slice it into vertical strips,
+    // each strip rotated to follow the arc at radius ~130px
+    const ringR = 130;       // radius of the centre of the logo ring
+    const logoArcSpan = 1.85 * Math.PI; // how far around the disc the logo spans (~330 deg)
+    const logoStartAngle = -Math.PI / 2 - logoArcSpan / 2; // top-centre, centred
+    const slices = 120;
+    const sliceW = img.naturalWidth / slices;
+    const logoH = 100; // rendered height of each slice
 
-    // --- Spindle hole (on top) ---
+    for (let i = 0; i < slices; i++) {
+      const angle = logoStartAngle + (i / slices) * logoArcSpan;
+      const sx = i * sliceW;
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(angle + logoArcSpan / slices / 2);
+      // Each slice centred on the ring radius
+      const sliceRenderW = (logoArcSpan * ringR) / slices + 0.5; // slight overlap
+      ctx.drawImage(img,
+        sx, 0, sliceW, img.naturalHeight,          // source strip
+        -sliceRenderW / 2, -ringR - logoH / 2,     // dest: centred on ring
+        sliceRenderW, logoH
+      );
+      ctx.restore();
+    }
+
+    // --- Spindle hole (on top of everything) ---
     ctx.save();
     ctx.beginPath();
-    ctx.arc(cx, cy, 20, 0, Math.PI * 2);
+    ctx.arc(cx, cy, 22, 0, Math.PI * 2);
     ctx.fillStyle = '#0d0d1a';
     ctx.fill();
-    const holeRing = ctx.createRadialGradient(cx, cy, 16, cx, cy, 22);
+    const holeRing = ctx.createRadialGradient(cx, cy, 18, cx, cy, 24);
     holeRing.addColorStop(0, 'rgba(200,200,230,0.6)');
     holeRing.addColorStop(1, 'rgba(200,200,230,0)');
     ctx.fillStyle = holeRing;
