@@ -155,10 +155,10 @@
   .hero-disc-logo {
     width: 340px;
     height: 340px;
-    border-radius: 50%;
-    object-fit: cover;
+    border-radius: 0;
+    object-fit: contain;
     display: block;
-    border: 3px solid rgba(200,16,46,0.7);
+    border: none;
     animation: coinSpin 4s linear infinite;
     transform-style: preserve-3d;
     backface-visibility: visible;
@@ -891,10 +891,11 @@
   }
 
   .nav-logo-img {
-    height: 40px;
-    width: 40px;
+    height: 36px;
+    width: auto;
+    max-width: 160px;
     object-fit: contain;
-    border-radius: 50%;
+    border-radius: 0;
     margin-right: 0.6rem;
     vertical-align: middle;
     filter: drop-shadow(0 0 4px rgba(200,16,46,0.5));
@@ -913,10 +914,11 @@
     50% { filter: drop-shadow(0 0 36px rgba(200,16,46,0.75)); }
   }
   .footer-logo-img {
-    height: 32px;
-    width: 32px;
+    height: 28px;
+    width: auto;
+    max-width: 130px;
     object-fit: contain;
-    border-radius: 50%;
+    border-radius: 0;
     margin-right: 0.5rem;
     vertical-align: middle;
     opacity: 0.85;
