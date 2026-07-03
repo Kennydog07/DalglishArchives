@@ -2086,85 +2086,97 @@
 </script>
 
 <script>
-function drawDisc(canvasId, mirrorText) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const W = 340, H = 340, cx = W/2, cy = H/2;
+(function() {
+  const W = 340, H = 340, cx = W/2, cy = H/2, R = 169;
+  const SPIN_MS = 4000; // match coinSpin duration
 
-  // Load the logo image
   const img = new Image();
-  img.onload = function() {
-    // Clear
+  img.src = 'Normal_Shoes_1.png';
+
+  function drawFrame(ctx, t) {
     ctx.clearRect(0, 0, W, H);
 
-    // Clip to circle
+    // Clip everything to disc circle
     ctx.save();
     ctx.beginPath();
-    ctx.arc(cx, cy, 169, 0, Math.PI * 2);
+    ctx.arc(cx, cy, R, 0, Math.PI * 2);
     ctx.clip();
 
-    // Silver disc background
-    const grad = ctx.createRadialGradient(cx - 40, cy - 40, 10, cx, cy, 169);
-    grad.addColorStop(0, '#f5f5fa');
-    grad.addColorStop(0.25, '#d0d0e0');
-    grad.addColorStop(0.55, '#9898b0');
-    grad.addColorStop(0.8, '#666680');
-    grad.addColorStop(1, '#404058');
-    ctx.fillStyle = grad;
+    // --- Silver base ---
+    const base = ctx.createRadialGradient(cx, cy, 0, cx, cy, R);
+    base.addColorStop(0,    '#e8e8f2');
+    base.addColorStop(0.35, '#c0c0d5');
+    base.addColorStop(0.65, '#8888a8');
+    base.addColorStop(1,    '#3a3a55');
+    ctx.fillStyle = base;
     ctx.fillRect(0, 0, W, H);
 
-    // Rainbow sheen
-    const rainbow = ctx.createConicGradient(0, cx, cy);
-    rainbow.addColorStop(0,    'rgba(255,0,100,0.18)');
-    rainbow.addColorStop(0.17, 'rgba(255,200,0,0.18)');
-    rainbow.addColorStop(0.33, 'rgba(0,255,150,0.18)');
-    rainbow.addColorStop(0.5,  'rgba(0,150,255,0.18)');
-    rainbow.addColorStop(0.67, 'rgba(200,0,255,0.18)');
-    rainbow.addColorStop(0.83, 'rgba(255,100,0,0.18)');
-    rainbow.addColorStop(1,    'rgba(255,0,100,0.18)');
-    ctx.fillStyle = rainbow;
+    // --- Iridescent rainbow rings (static, disc surface) ---
+    const iri = ctx.createConicGradient(0, cx, cy);
+    iri.addColorStop(0,     'rgba(255,60,120,0.22)');
+    iri.addColorStop(0.15,  'rgba(255,200,0,0.22)');
+    iri.addColorStop(0.30,  'rgba(80,255,140,0.22)');
+    iri.addColorStop(0.45,  'rgba(40,160,255,0.22)');
+    iri.addColorStop(0.60,  'rgba(180,40,255,0.22)');
+    iri.addColorStop(0.75,  'rgba(255,100,30,0.22)');
+    iri.addColorStop(1,     'rgba(255,60,120,0.22)');
+    ctx.fillStyle = iri;
     ctx.fillRect(0, 0, W, H);
 
-    ctx.restore();
+    // --- Animated light sweep: bright streak that travels across disc ---
+    // t goes 0→1 each spin cycle
+    // sweep angle tracks the CSS rotateY so the highlight appears on the near face
+    const sweepAngle = t * Math.PI * 2;
+    // light hits the disc surface as a vertical band whose x-position oscillates
+    const lightX = cx + Math.sin(sweepAngle) * R * 0.9;
+    const streak = ctx.createLinearGradient(lightX - 80, 0, lightX + 80, 0);
+    streak.addColorStop(0,   'rgba(255,255,255,0)');
+    streak.addColorStop(0.3, 'rgba(255,255,255,0.08)');
+    streak.addColorStop(0.5, 'rgba(255,255,255,0.45)');
+    streak.addColorStop(0.7, 'rgba(255,255,255,0.08)');
+    streak.addColorStop(1,   'rgba(255,255,255,0)');
+    ctx.fillStyle = streak;
+    ctx.fillRect(0, 0, W, H);
 
-    // Logo image in a ring around the hole
-    // Draw logo arc: fit the wide logo image wrapped in a band
-    // We'll draw it 4 times around the disc at 90-degree intervals, scaled to fit the label area
-    const labelR = 115; // radius of label centre ring
-    const logoW = 180, logoH = 58; // size on disc
+    ctx.restore(); // end clip
 
-    const positions = [0, Math.PI/2, Math.PI, Math.PI * 1.5];
-    positions.forEach(angle => {
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(angle);
-      ctx.translate(0, -labelR);
-      if (mirrorText) {
-        ctx.scale(-1, 1); // keep readable on back face
-      }
-      ctx.drawImage(img, -logoW/2, -logoH/2, logoW, logoH);
-      ctx.restore();
-    });
+    // --- Logo: centred, transparent bg, large ---
+    // Logo is wide (approx 2:1 aspect). Draw it to fill most of the disc label area.
+    const logoW = 280, logoH = 90;
+    ctx.drawImage(img, cx - logoW/2, cy - logoH/2, logoW, logoH);
 
-    // Spindle hole
+    // --- Spindle hole (on top) ---
     ctx.save();
     ctx.beginPath();
-    ctx.arc(cx, cy, 18, 0, Math.PI * 2);
-    ctx.fillStyle = '#111120';
+    ctx.arc(cx, cy, 20, 0, Math.PI * 2);
+    ctx.fillStyle = '#0d0d1a';
     ctx.fill();
-    ctx.strokeStyle = 'rgba(200,200,230,0.5)';
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
+    const holeRing = ctx.createRadialGradient(cx, cy, 16, cx, cy, 22);
+    holeRing.addColorStop(0, 'rgba(200,200,230,0.6)');
+    holeRing.addColorStop(1, 'rgba(200,200,230,0)');
+    ctx.fillStyle = holeRing;
+    ctx.fill();
     ctx.restore();
-  };
-  img.src = 'Normal_Shoes_1.png';
-}
+  }
 
-window.addEventListener('load', function() {
-  drawDisc('discCanvas', false);
-  drawDisc('discCanvasBack', false); // same orientation — both faces read correctly
-});
+  function animate() {
+    const now = performance.now();
+    const t = (now % SPIN_MS) / SPIN_MS;
+
+    ['discCanvas','discCanvasBack'].forEach(id => {
+      const c = document.getElementById(id);
+      if (c) drawFrame(c.getContext('2d'), t);
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', animate);
+  } else {
+    img.complete ? animate() : img.addEventListener('load', animate);
+  }
+})();
 </script>
 </body>
 </html>
