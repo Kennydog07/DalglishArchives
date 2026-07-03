@@ -217,21 +217,14 @@
     transform: rotateY(180deg);
   }
 
-  .disc-label-img {
+  .disc-canvas {
     position: absolute;
-    width: 76%;
-    height: 76%;
-    object-fit: contain;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 340px;
+    height: 340px;
     border-radius: 50%;
-  }
-
-  /* back face label needs to be mirrored so it reads correctly */
-  .disc-label-flipped {
-    transform: translate(-50%, -50%) scaleX(-1);
+    z-index: 2;
   }
 
   @keyframes coinSpin {
@@ -961,9 +954,9 @@
   }
 
   .nav-logo-img {
-    height: 36px;
+    height: 52px;
     width: auto;
-    max-width: 160px;
+    max-width: 260px;
     object-fit: contain;
     border-radius: 0;
     margin-right: 0.6rem;
@@ -1259,10 +1252,10 @@
     <div class="hero-disc">
   <div class="disc-card">
     <div class="disc-face disc-front">
-      <img src="Normal_Shoes_1.png" alt="Normal Shoes" class="disc-label-img">
+      <canvas id="discCanvas" width="340" height="340" class="disc-canvas"></canvas>
     </div>
     <div class="disc-face disc-back">
-      <img src="Normal_Shoes_1.png" alt="Normal Shoes" class="disc-label-img disc-label-flipped">
+      <canvas id="discCanvasBack" width="340" height="340" class="disc-canvas"></canvas>
     </div>
   </div>
 </div>
@@ -2090,6 +2083,88 @@
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 4000);
   }
+</script>
+
+<script>
+function drawDisc(canvasId, mirrorText) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = 340, H = 340, cx = W/2, cy = H/2;
+
+  // Load the logo image
+  const img = new Image();
+  img.onload = function() {
+    // Clear
+    ctx.clearRect(0, 0, W, H);
+
+    // Clip to circle
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, 169, 0, Math.PI * 2);
+    ctx.clip();
+
+    // Silver disc background
+    const grad = ctx.createRadialGradient(cx - 40, cy - 40, 10, cx, cy, 169);
+    grad.addColorStop(0, '#f5f5fa');
+    grad.addColorStop(0.25, '#d0d0e0');
+    grad.addColorStop(0.55, '#9898b0');
+    grad.addColorStop(0.8, '#666680');
+    grad.addColorStop(1, '#404058');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Rainbow sheen
+    const rainbow = ctx.createConicGradient(0, cx, cy);
+    rainbow.addColorStop(0,    'rgba(255,0,100,0.18)');
+    rainbow.addColorStop(0.17, 'rgba(255,200,0,0.18)');
+    rainbow.addColorStop(0.33, 'rgba(0,255,150,0.18)');
+    rainbow.addColorStop(0.5,  'rgba(0,150,255,0.18)');
+    rainbow.addColorStop(0.67, 'rgba(200,0,255,0.18)');
+    rainbow.addColorStop(0.83, 'rgba(255,100,0,0.18)');
+    rainbow.addColorStop(1,    'rgba(255,0,100,0.18)');
+    ctx.fillStyle = rainbow;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.restore();
+
+    // Logo image in a ring around the hole
+    // Draw logo arc: fit the wide logo image wrapped in a band
+    // We'll draw it 4 times around the disc at 90-degree intervals, scaled to fit the label area
+    const labelR = 115; // radius of label centre ring
+    const logoW = 180, logoH = 58; // size on disc
+
+    const positions = [0, Math.PI/2, Math.PI, Math.PI * 1.5];
+    positions.forEach(angle => {
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(angle);
+      ctx.translate(0, -labelR);
+      if (mirrorText) {
+        ctx.scale(-1, 1); // keep readable on back face
+      }
+      ctx.drawImage(img, -logoW/2, -logoH/2, logoW, logoH);
+      ctx.restore();
+    });
+
+    // Spindle hole
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, 18, 0, Math.PI * 2);
+    ctx.fillStyle = '#111120';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(200,200,230,0.5)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.restore();
+  };
+  img.src = 'Normal_Shoes_1.png';
+}
+
+window.addEventListener('load', function() {
+  drawDisc('discCanvas', false);
+  drawDisc('discCanvasBack', false); // same orientation — both faces read correctly
+});
 </script>
 </body>
 </html>
