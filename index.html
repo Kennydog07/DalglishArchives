@@ -70,11 +70,11 @@
     background: rgba(8,8,8,0.92);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(200,16,46,0.3);
-    padding: 0 5%;
+    padding: 8px 5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
+    height: 120px;
   }
 
   .nav-logo {
@@ -105,7 +105,7 @@
   .nav-links a.active { color: var(--red); }
 
   /* ── PAGES ── */
-  .page { display: none; padding-top: 64px; min-height: 100vh; }
+  .page { display: none; padding-top: 120px; min-height: 100vh; }
   .page.active { display: block; }
 
   /* ══════════════════════════════════════
@@ -2134,9 +2134,9 @@
     ctx.restore(); // end clip
 
     // --- Logo straight across, above the hole ---
-    const logoW = 200, logoH = 200;
+    const logoW = 140, logoH = 140;
     const logoX = cx - logoW / 2;
-    const logoY = cy - 90 - logoH / 2;
+    const logoY = cy - 95 - logoH / 2;
     ctx.save();
     if (mirror) {
       ctx.translate(W, 0);
