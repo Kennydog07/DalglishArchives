@@ -410,12 +410,24 @@
     color: var(--white);
     margin-bottom: 1.5rem;
   }
-  .pkg-disc-canvas {
+  .pkg-disc-icon {
     width: 64px;
     height: 64px;
     border-radius: 50%;
+    background: conic-gradient(#333, #1a1a1a, #2a2a2a, #111, #333);
+    border: 2px solid rgba(200,16,46,0.3);
+    position: relative;
     margin-bottom: 1.5rem;
-    display: block;
+  }
+  .pkg-disc-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1px solid rgba(200,16,46,0.3);
   }
   .pkg-features {
     list-style: none;
@@ -637,12 +649,27 @@
     cursor: pointer;
   }
   .pkg-header-left { display: flex; align-items: center; gap: 1.5rem; }
-  .pkg-disc-canvas-lg {
-    width: 80px;
-    height: 80px;
+  .pkg-disc-lg {
+    width: 80px; height: 80px;
     border-radius: 50%;
+    background: conic-gradient(#444, #222, #3a3a3a, #111, #444);
+    border: 3px solid rgba(200,16,46,0.4);
+    position: relative;
     flex-shrink: 0;
-    display: block;
+  }
+  .pkg-disc-lg::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1px solid rgba(200,16,46,0.4);
+  }
+  .featured-pkg .pkg-disc-lg {
+    border-color: var(--red);
+    box-shadow: 0 0 20px rgba(200,16,46,0.3);
   }
   .pkg-header-info .pkg-tier { margin-bottom: 0.25rem; }
   .pkg-header-info .pkg-name { font-size: 2.2rem; margin-bottom: 0; }
@@ -916,27 +943,7 @@
     .about-grid, .enquiry-grid { grid-template-columns: 1fr; gap: 2rem; }
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
     .merch-grid { grid-template-columns: repeat(2, 1fr); }
-    .hero-disc {
-      position: relative;
-      right: auto;
-      top: auto;
-      transform: none;
-      width: 260px;
-      height: 260px;
-      margin: 1.5rem auto 0;
-    }
-    .disc-card {
-      width: 260px;
-      height: 260px;
-    }
-    .disc-face {
-      width: 260px;
-      height: 260px;
-    }
-    .disc-canvas {
-      width: 260px;
-      height: 260px;
-    }
+    .hero-disc { display: none; }
     .hero-slash { display: none; }
     .pkg-header { grid-template-columns: 1fr; gap: 1rem; }
     .pkg-header-right { text-align: left; }
@@ -1224,7 +1231,7 @@
 
 <!-- ── NAV ── -->
 <nav>
-  <div class="nav-logo" onclick="showPage('home')"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="nav-logo-img"></div>
+  <div class="nav-logo" onclick="showPage('home')"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="nav-logo-img"></div>
   <ul class="nav-links">
     <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
     <li><a onclick="showPage('about')" id="nav-about">Who We Are</a></li>
@@ -1286,7 +1293,7 @@
     <div class="package-grid">
       <!-- Standard -->
       <div class="pkg-card" onclick="showPage('packages')">
-        <canvas class="pkg-disc-canvas" id="pkgDiscstd" width="64" height="64"></canvas>
+        <div class="pkg-disc-icon"></div>
         <p class="pkg-tier">Tier 01</p>
         <h3 class="pkg-name">STANDARD</h3>
         <ul class="pkg-features">
@@ -1301,7 +1308,7 @@
       <!-- Premium -->
       <div class="pkg-card featured" onclick="showPage('packages')">
         <div class="pkg-badge">Most Popular</div>
-        <canvas class="pkg-disc-canvas" id="pkgDiscprem" width="64" height="64"></canvas>
+        <div class="pkg-disc-icon"></div>
         <p class="pkg-tier">Tier 02</p>
         <h3 class="pkg-name">PREMIUM</h3>
         <ul class="pkg-features">
@@ -1316,7 +1323,7 @@
 
       <!-- Ultimate -->
       <div class="pkg-card" onclick="showPage('packages')">
-        <canvas class="pkg-disc-canvas" id="pkgDiscult" width="64" height="64"></canvas>
+        <div class="pkg-disc-icon"></div>
         <p class="pkg-tier">Tier 03</p>
         <h3 class="pkg-name">ULTIMATE</h3>
         <ul class="pkg-features">
@@ -1375,7 +1382,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1442,7 +1449,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1522,7 +1529,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1551,7 +1558,7 @@
     <div class="package-detail">
       <div class="pkg-header">
         <div class="pkg-header-left">
-          <canvas class="pkg-disc-canvas-lg" id="pkgDiscstdLg" width="80" height="80"></canvas>
+          <div class="pkg-disc-lg"></div>
           <div class="pkg-header-info">
             <p class="pkg-tier">Tier 01</p>
             <h2 class="pkg-name">STANDARD</h2>
@@ -1597,7 +1604,7 @@
       <div class="pkg-badge">Most Popular</div>
       <div class="pkg-header">
         <div class="pkg-header-left">
-          <canvas class="pkg-disc-canvas-lg" id="pkgDiscpremLg" width="80" height="80"></canvas>
+          <div class="pkg-disc-lg"></div>
           <div class="pkg-header-info">
             <p class="pkg-tier">Tier 02</p>
             <h2 class="pkg-name">PREMIUM</h2>
@@ -1639,7 +1646,7 @@
     <div class="package-detail">
       <div class="pkg-header">
         <div class="pkg-header-left">
-          <canvas class="pkg-disc-canvas-lg" id="pkgDiscultLg" width="80" height="80"></canvas>
+          <div class="pkg-disc-lg"></div>
           <div class="pkg-header-info">
             <p class="pkg-tier">Tier 03</p>
             <h2 class="pkg-name">ULTIMATE</h2>
@@ -1683,7 +1690,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1779,7 +1786,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1937,7 +1944,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -2048,7 +2055,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -2084,7 +2091,7 @@
   const SPIN_MS = 4000; // match coinSpin duration
 
   const img = new Image();
-  img.src = 'Normal_Shoes_2_transparent.png';
+  img.src = 'Normal_Shoes_transparent.png';
 
   function drawFrame(ctx, t) {
     ctx.clearRect(0, 0, W, H);
@@ -2134,9 +2141,9 @@
     ctx.restore(); // end clip
 
     // --- Logo straight across, above the hole ---
-    const logoW = 200, logoH = 200;
+    const logoW = 340, logoH = 108;
     const logoX = cx - logoW / 2;
-    const logoY = cy - 90 - logoH / 2; // midway between top and hole
+    const logoY = cy - 75 - logoH / 2; // midway between top and hole
     ctx.drawImage(img, logoX, logoY, logoW, logoH);
 
     // --- Spindle hole (on top of everything) ---
@@ -2170,92 +2177,6 @@
   } else {
     img.complete ? animate() : img.addEventListener('load', animate);
   }
-})();
-</script>
-
-<script>
-(function() {
-  const SPIN_MS = 4000;
-  const pkgImg = new Image();
-  pkgImg.src = 'Normal_Shoes_2_transparent.png';
-
-  function drawPkgDisc(ctx, W, t) {
-    const cx = W/2, cy = W/2, R = W/2 - 1;
-    ctx.clearRect(0, 0, W, W);
-
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(cx, cy, R, 0, Math.PI*2);
-    ctx.clip();
-
-    // Silver base
-    const base = ctx.createRadialGradient(cx-W*0.1, cy-W*0.1, 0, cx, cy, R);
-    base.addColorStop(0, '#e8e8f2');
-    base.addColorStop(0.35, '#c0c0d5');
-    base.addColorStop(0.65, '#8888a8');
-    base.addColorStop(1, '#3a3a55');
-    ctx.fillStyle = base;
-    ctx.fillRect(0, 0, W, W);
-
-    // Iridescent sheen
-    const iri = ctx.createConicGradient(0, cx, cy);
-    iri.addColorStop(0,    'rgba(255,60,120,0.2)');
-    iri.addColorStop(0.2,  'rgba(255,200,0,0.2)');
-    iri.addColorStop(0.4,  'rgba(80,255,140,0.2)');
-    iri.addColorStop(0.6,  'rgba(40,160,255,0.2)');
-    iri.addColorStop(0.8,  'rgba(180,40,255,0.2)');
-    iri.addColorStop(1,    'rgba(255,60,120,0.2)');
-    ctx.fillStyle = iri;
-    ctx.fillRect(0, 0, W, W);
-
-    // Rotating light sweep
-    const lightX = cx + Math.sin(t * Math.PI * 2) * R * 0.85;
-    const streak = ctx.createLinearGradient(lightX - W*0.3, 0, lightX + W*0.3, 0);
-    streak.addColorStop(0,   'rgba(255,255,255,0)');
-    streak.addColorStop(0.4, 'rgba(255,255,255,0.07)');
-    streak.addColorStop(0.5, 'rgba(255,255,255,0.35)');
-    streak.addColorStop(0.6, 'rgba(255,255,255,0.07)');
-    streak.addColorStop(1,   'rgba(255,255,255,0)');
-    ctx.fillStyle = streak;
-    ctx.fillRect(0, 0, W, W);
-
-    ctx.restore();
-
-    // Logo above hole
-    if (pkgImg.complete && pkgImg.naturalWidth > 0) {
-      const lw = W * 0.55, lh = lw * 1.0;
-      const lx = cx - lw/2;
-      const ly = cy - W * 0.16 - lh/2;
-      ctx.drawImage(pkgImg, lx, ly, lw, lh);
-    }
-
-    // Spindle hole
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(cx, cy, W * 0.055, 0, Math.PI*2);
-    ctx.fillStyle = '#0d0d1a';
-    ctx.fill();
-    ctx.restore();
-  }
-
-  const smallIds = ['pkgDiscstd','pkgDiscprem','pkgDiscult'];
-  const lgIds    = ['pkgDiscstdLg','pkgDiscpremLg','pkgDiscultLg'];
-
-  function animatePkg() {
-    const t = (performance.now() % SPIN_MS) / SPIN_MS;
-    smallIds.forEach(id => {
-      const c = document.getElementById(id);
-      if (c) drawPkgDisc(c.getContext('2d'), 64, t);
-    });
-    lgIds.forEach(id => {
-      const c = document.getElementById(id);
-      if (c) drawPkgDisc(c.getContext('2d'), 80, t);
-    });
-    requestAnimationFrame(animatePkg);
-  }
-
-  function start() { pkgImg.complete ? animatePkg() : pkgImg.addEventListener('load', animatePkg); }
-  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', start) : start();
 })();
 </script>
 </body>
