@@ -1224,7 +1224,7 @@
 
 <!-- ── NAV ── -->
 <nav>
-  <div class="nav-logo" onclick="showPage('home')"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="nav-logo-img"></div>
+  <div class="nav-logo" onclick="showPage('home')"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="nav-logo-img"></div>
   <ul class="nav-links">
     <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
     <li><a onclick="showPage('about')" id="nav-about">Who We Are</a></li>
@@ -1375,7 +1375,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1442,7 +1442,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1522,7 +1522,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1683,7 +1683,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1779,7 +1779,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -1937,7 +1937,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -2048,7 +2048,7 @@
 
   <footer>
     <div>
-      <div class="footer-logo"><img src="Normal_Shoes_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
+      <div class="footer-logo"><img src="Normal_Shoes_2_transparent.png" alt="Normal Shoes" class="footer-logo-img">NORMAL SHOES</div>
       <p class="footer-tagline">Professional Blu-ray packages for film students.</p>
     </div>
     <ul class="footer-links">
@@ -2084,7 +2084,7 @@
   const SPIN_MS = 4000; // match coinSpin duration
 
   const img = new Image();
-  img.src = 'Normal_Shoes_transparent.png';
+  img.src = 'Normal_Shoes_2_transparent.png';
 
   function drawFrame(ctx, t) {
     ctx.clearRect(0, 0, W, H);
@@ -2134,9 +2134,9 @@
     ctx.restore(); // end clip
 
     // --- Logo straight across, above the hole ---
-    const logoW = 340, logoH = 108;
+    const logoW = 200, logoH = 200;
     const logoX = cx - logoW / 2;
-    const logoY = cy - 75 - logoH / 2; // midway between top and hole
+    const logoY = cy - 90 - logoH / 2; // midway between top and hole
     ctx.drawImage(img, logoX, logoY, logoW, logoH);
 
     // --- Spindle hole (on top of everything) ---
@@ -2177,7 +2177,7 @@
 (function() {
   const SPIN_MS = 4000;
   const pkgImg = new Image();
-  pkgImg.src = 'Normal_Shoes_transparent.png';
+  pkgImg.src = 'Normal_Shoes_2_transparent.png';
 
   function drawPkgDisc(ctx, W, t) {
     const cx = W/2, cy = W/2, R = W/2 - 1;
@@ -2223,9 +2223,9 @@
 
     // Logo above hole
     if (pkgImg.complete && pkgImg.naturalWidth > 0) {
-      const lw = W * 0.82, lh = lw * 0.28;
+      const lw = W * 0.55, lh = lw * 1.0;
       const lx = cx - lw/2;
-      const ly = cy - W * 0.22 - lh/2;
+      const ly = cy - W * 0.16 - lh/2;
       ctx.drawImage(pkgImg, lx, ly, lw, lh);
     }
 
